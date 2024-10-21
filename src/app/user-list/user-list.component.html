@@ -1,0 +1,10 @@
+<div class="player-container" *ngFor="let player of this.players">
+    <h1 (click)="deletePlayer(player.id)">X</h1>
+    <span>{{this.player.name}}</span>
+    <card-collection></card-collection>
+</div>
+
+<div id="user-list">
+    <input id="add-user-input">
+    <button (click)="addUser()">Spieler hinzufügen</button>
+</div>

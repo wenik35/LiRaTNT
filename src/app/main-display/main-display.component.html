@@ -1,0 +1,4 @@
+<div class="button-container">
+    <button *ngFor="let button of this.buttons" [ngClass]="{'inactive': !button.active}" (click)="this.button.action()">{{button.name}}</button>
+</div>
+<card-display (ev)="this.cardChanged($event)" class="middle-card"></card-display>

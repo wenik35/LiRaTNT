@@ -1,0 +1,26 @@
+user-list {
+    .player-container {
+        font-size: xx-large;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        h1 {
+            cursor: pointer;
+            margin-right: 1rem;
+
+            &:hover {
+                color: red;
+            }
+        }
+
+        span {
+            min-width: 15rem;
+        }
+
+        img {
+            height: 9vh;
+            margin-left: 0.5rem;
+        }
+    }
+}

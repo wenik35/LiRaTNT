@@ -1,0 +1,23 @@
+#content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: sans-serif;
+    
+    main-display {
+        height: 50vh;
+    }
+
+    card-display {
+        height: fit-content;
+    }
+
+    .side-bar {
+        display: flex;
+        flex-direction: column;
+
+        img {
+            max-height: 10rem;
+        }
+    }
+}
