@@ -19,7 +19,7 @@ import { CardCollectionComponent } from "../card-collection/card-collection.comp
 export class MainDisplayComponent implements AfterViewInit {
   public buttons: ActionButton[] = [];
 
-  constructor(private cardService: CardExchangeService) { }
+  constructor(private cardExchangeService: CardExchangeService) { }
 
   @ViewChild(CardCollectionComponent)
   mainCardDisplay: CardCollectionComponent | undefined;
@@ -27,7 +27,7 @@ export class MainDisplayComponent implements AfterViewInit {
   ngAfterViewInit(){
     this.buttons.push(
       {name: "Neue Karte ziehen", active: true, action: () => {
-        const newCardId = this.cardService.drawCard();
+        const newCardId = this.cardExchangeService.drawCard();
         this.mainCardDisplay!.cardIds[0] = newCardId;
         this.cardChanged([newCardId]);
       }},
@@ -40,8 +40,15 @@ export class MainDisplayComponent implements AfterViewInit {
       this.buttons[0].active = true;
       this.buttons[1].active = false;
     } else {
-      this.buttons[0].active = false;
+      //this.buttons[0].active = false;
+      this.buttons.find((button) => button.name = "Neue Karte ziehen")!.active = false;
       this.buttons[1].active = true;
     }
+
+    
+    this.cardExchangeService.cachedListenerFuns?.push(() => {
+      this.buttons[0].active = true;
+      this.buttons[1].active = false;
+    })
   }
 }
