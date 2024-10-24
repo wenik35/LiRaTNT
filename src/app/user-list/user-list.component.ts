@@ -1,8 +1,7 @@
 import { DOCUMENT, NgFor } from '@angular/common';
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Player } from './player';
-import { CardDisplayComponent } from "../card-display/card-display.component";
-import { CardCollectionComponent } from "../card-display/card-collection/card-collection.component";
+import { CardCollectionComponent } from '../card-collection/card-collection.component';
 
 @Component({
   selector: 'user-list',
@@ -10,7 +9,6 @@ import { CardCollectionComponent } from "../card-display/card-collection/card-co
   standalone: true,
   imports: [
     NgFor,
-    CardDisplayComponent,
     CardCollectionComponent
 ],
   templateUrl: './user-list.component.html',

@@ -3,7 +3,6 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { CardExchangeService } from './card-display/card-exchange.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration()]

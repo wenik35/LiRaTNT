@@ -1,47 +1,54 @@
 import { AfterViewInit, Component, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CardDisplayComponent, CardExchangeEvent } from "../card-display/card-display.component";
 import { NgClass, NgFor } from '@angular/common';
 import { ActionButton } from './button';
-import { CardExchangeService } from '../card-display/card-exchange.service';
+import { CardExchangeService } from '../card-collection/card-exchange.service';
+import { CardCollectionComponent } from "../card-collection/card-collection.component";
 
 @Component({
   selector: 'main-display',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CardDisplayComponent,
     NgFor,
-    NgClass
-  ],
+    NgClass,
+    CardCollectionComponent
+],
   templateUrl: './main-display.component.html',
   styleUrl: './main-display.component.scss'
 })
 export class MainDisplayComponent implements AfterViewInit {
   public buttons: ActionButton[] = [];
 
-  constructor(private cardService: CardExchangeService) { }
+  constructor(private cardExchangeService: CardExchangeService) { }
 
-  @ViewChild(CardDisplayComponent)
-  mainCardDisplay: CardDisplayComponent | undefined;
+  @ViewChild(CardCollectionComponent)
+  mainCardDisplay: CardCollectionComponent | undefined;
 
   ngAfterViewInit(){
     this.buttons.push(
       {name: "Neue Karte ziehen", active: true, action: () => {
-        const newCardId = this.cardService.drawCard();
-        this.mainCardDisplay!.cardId = newCardId;
-        this.cardChanged(newCardId);
+        const newCardId = this.cardExchangeService.drawCard();
+        this.mainCardDisplay!.cardIds[0] = newCardId;
+        this.cardChanged([newCardId]);
       }},
-      {name: "Karte wegwerfen", active: false, action: () => {this.mainCardDisplay!.cardId = -1; this.cardChanged(-1);}},
+      {name: "Karte wegwerfen", active: false, action: () => {this.mainCardDisplay!.cardIds[0] = -1; this.cardChanged([-1]);}},
     );
   }
 
-  public cardChanged(newId: number): void{
-    if (newId == -1) {
+  public cardChanged(ids: number[]): void{
+    if (ids[0] == -1) {
       this.buttons[0].active = true;
       this.buttons[1].active = false;
     } else {
-      this.buttons[0].active = false;
+      //this.buttons[0].active = false;
+      this.buttons.find((button) => button.name = "Neue Karte ziehen")!.active = false;
       this.buttons[1].active = true;
     }
+
+    
+    this.cardExchangeService.cachedListenerFuns?.push(() => {
+      this.buttons[0].active = true;
+      this.buttons[1].active = false;
+    })
   }
 }
