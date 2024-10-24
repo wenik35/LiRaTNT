@@ -37,16 +37,16 @@ export class CardCollectionComponent {
       this.cardExchangeService.swapCard(id, (newId: number) => {
         this.replaceCardId(id, newId);
         this.cachedId = undefined;
+
+        if (this.isExtendable){
+          let emptyIndex = this.cardIds.findIndex((id) => id == -1);
+          if (emptyIndex == -1) {this.cardIds.push(-1);}
+      
+          emptyIndex = this.cardIds.findIndex((id) => id == -1);
+          if (emptyIndex < this.cardIds.length-1 && this.cardIds.length > 1) {this.cardIds.splice(emptyIndex, 1);}
+        }
       });
     };
-
-    if (this.isExtendable){
-      let emptyIndex = this.cardIds.findIndex((id) => id == -1);
-      if (emptyIndex == -1) {this.cardIds.push(-1);}
-  
-      emptyIndex = this.cardIds.findIndex((id) => id == -1);
-      if (emptyIndex < this.cardIds.length-1 && this.cardIds.length > 1) {this.cardIds.splice(emptyIndex, 1);}
-    }
   }
 
   private replaceCardId(oldId: number, newId: number): void {

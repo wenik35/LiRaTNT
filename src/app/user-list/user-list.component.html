@@ -1,3 +1,5 @@
+<h1>Spieler:</h1>
+
 <div class="player-container" *ngFor="let player of this.players">
     <h1 (click)="deletePlayer(player.id)">X</h1>
     <span>{{this.player.name}}</span>
