@@ -7,12 +7,13 @@ import { range } from 'rxjs';
 export class CardExchangeService {
   private cachedCardId?: number;
   private cachedCallbackFun?: CallableFunction;
-  private availableCards: number[] = [];
+  private drawStack: number[] = [];
+  private trashStack: number[] = [];
   public cachedListenerFuns?: CallableFunction[] = [];
 
   constructor() {
     for (let i = 0; i < 120; i++){
-      this.availableCards.push(i);
+      this.drawStack.push(i);
     }
   }
 
@@ -35,10 +36,19 @@ export class CardExchangeService {
   }
 
   public drawCard(): number{
-    const randIndex = Math.floor(Math.random() * this.availableCards?.length);
-    const cardId = this.availableCards[randIndex];
-    this.availableCards.splice(randIndex, 1);
+    const randIndex = Math.floor(Math.random() * this.drawStack?.length);
+    const cardId = this.drawStack[randIndex];
+    this.drawStack.splice(randIndex, 1);
     return cardId;
+  }
+
+  public trashCard(cardId: number){
+    this.trashStack.push(cardId);
+  }
+
+  public backToDrawStack(cardId: number){
+    const position = Math.floor(Math.random() * this.drawStack.length);
+    this.drawStack.splice(position, 0, cardId);
   }
 
   public deleteCache(){

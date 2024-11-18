@@ -7,6 +7,7 @@ user-list {
 
         h1 {
             cursor: pointer;
+            margin: 0;
             margin-right: 1rem;
 
             &:hover {
@@ -15,7 +16,7 @@ user-list {
         }
 
         span {
-            min-width: 15rem;
+            margin-right: 1rem;
         }
 
         img {

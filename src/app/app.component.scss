@@ -8,6 +8,10 @@
         flex-direction: column;
         align-items: center;
     }
+
+    user-list {
+        align-items: start !important;
+    }
     
     main-display {
         height: 50vh;

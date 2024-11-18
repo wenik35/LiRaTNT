@@ -1,8 +1,8 @@
-<h1>Spieler:</h1>
+<h1>Mitspieler</h1>
 
 <div class="player-container" *ngFor="let player of this.players">
-    <h1 (click)="deletePlayer(player.id)">X</h1>
-    <span>{{this.player.name}}</span>
+    <h1 (click)="deletePlayer(player.id)" class="fa-solid fa-xmark delete-player-button"></h1>
+    <span>{{player.name}}</span>
     <card-collection></card-collection>
 </div>
 

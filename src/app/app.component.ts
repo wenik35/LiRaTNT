@@ -1,6 +1,6 @@
 import { ApplicationRef, Component, Inject, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgIf } from '@angular/common';
 import { UserListComponent } from './user-list/user-list.component';
 import { MainDisplayComponent } from "./main-display/main-display.component";
 import { CardCollectionComponent } from './card-collection/card-collection.component';
@@ -20,6 +20,5 @@ export class AppComponent {
 
   constructor(){
   }
-
-
+  
 }
